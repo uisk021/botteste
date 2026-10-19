@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐤 Patinho — Rádio Habbler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== PARTÍCULAS DE FUNDO ========== -->
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#inicio" class="logo">
+                <span class="logo-icon">🐤</span>
+                <span class="logo-text">Patinho</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#radio">Rádio</a></li>
+                <li><a href="#comandos">Comandos</a></li>
+                <li><a href="#entretenimento">Diversão</a></li>
+                <li><a href="#ranking">Ranking</a></li>
+                <li><a href="#status">Status</a></li>
+            </ul>
+            <div id="status-badge" class="status-badge offline">
+                <span class="dot"></span>
+                <span class="badge-text">Offline</span>
+            </div>
+            <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header id="inicio" class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content fade-in">
+            <p class="hero-tag">🐤 BOT OFICIAL DA RÁDIO HABBLER</p>
+            <h1 class="hero-title">
+                Música, Economia,<br>
+                <span class="gradient-text">Diversão & Habblet.</span>
+            </h1>
+            <p class="hero-desc">
+                O bot mais completo do servidor. Ouça a rádio ao vivo,
+                ganhe moedas, suba no ranking e muito mais.
+            </p>
+            <div class="hero-botoes">
+                <a href="#radio" class="btn btn-primary">
+                    <span>📻</span> Ouvir a Rádio
+                </a>
+                <a href="#comandos" class="btn btn-outline">
+                    <span>📜</span> Ver Comandos
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- ========== 📻 PLAYER ORBITAL ========== -->
+    <section id="radio" class="section">
+        <div class="section-header fade-in">
+            <p class="section-tag">AO VIVO</p>
+            <h2 class="section-title">Rádio Habbler</h2>
+            <p class="section-desc">Ouça a melhor programação 24 horas direto do site.</p>
+        </div>
+
+        <div class="player-orbital fade-in">
+            <!-- Anéis orbitais -->
+            <div class="orbital-rings" id="orbital-rings">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+            </div>
+
+            <!-- Player central -->
+            <div class="player-core">
+                <audio id="radio-audio" preload="none">
+                    <source src="https://painel.dedicado.stream:8044/;" type="audio/mpeg">
+                </audio>
+
+                <button class="play-btn" id="btn-play" onclick="toggleRadio()">
+                    <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
+                </button>
+
+                <p class="player-label" id="radio-status">Toque para ouvir</p>
+            </div>
+
+            <!-- Controles -->
+            <div class="player-controls">
+                <div class="volume-wrap">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                    </svg>
+                    <input type="range" id="volume" min="0" max="100" value="70"
+                           oninput="mudarVolume(this.value)" class="volume-slider">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 📜 COMANDOS ========== -->
+    <section id="comandos" class="section section-alt">
+        <div class="section-header fade-in">
+            <p class="section-tag">PREFIXO: hbl</p>
+            <h2 class="section-title">Comandos</h2>
+            <p class="section-desc">Tudo o que o Patinho pode fazer no servidor.</p>
+        </div>
+
+        <div class="comandos-grid">
+            <div class="cmd-card fade-in">
+                <div class="cmd-icon">💰</div>
+                <h3>Economia & Habblet</h3>
+                <ul>
+                    <li><code>hbl daily</code> <span>Recompensa diária + XP</span></li>
+                    <li><code>hbl saldo</code> <span>Ver saldo e avatar</span></li>
+                    <li><code>hbl pagar @user 100</code> <span>Transferir</span></li>
+                    <li><code>hbl top</code> <span>Ranking dos ricos</span></li>
+                </ul>
+            </div>
+            <div class="cmd-card fade-in">
+                <div class="cmd-icon">🎵</div>
+                <h3>Música & Rádio</h3>
+                <ul>
+                    <li><code>hbl play musica</code> <span>Tocar música</span></li>
+                    <li><code>hbl pause</code> <span>Pausar</span></li>
+                    <li><code>hbl skip</code> <span>Pular</span></li>
+                    <li><code>hbl stop</code> <span>Desconectar</span></li>
+                </ul>
+            </div>
+            <div class="cmd-card fade-in">
+                <div class="cmd-icon">🛡️</div>
+                <h3>Moderação</h3>
+                <ul>
+                    <li><code>hbl ban @user</code> <span>Banir</span></li>
+                    <li><code>hbl kick @user</code> <span>Expulsar</span></li>
+                    <li><code>hbl mute @user</code> <span>Silenciar</span></li>
+                    <li><code>hbl clear 10</code> <span>Apagar msgs</span></li>
+                </ul>
+            </div>
+            <div class="cmd-card fade-in">
+                <div class="cmd-icon">🎮</div>
+                <h3>Jogos & Diversão</h3>
+                <ul>
+                    <li><code>hbl uno</code> <span>Jogo de UNO</span></li>
+                    <li><code>hbl 8ball pergunta</code> <span>Bola mágica</span></li>
+                    <li><code>hbl chat pergunta</code> <span>Falar com IA</span></li>
+                    <li><code>hbl ping</code> <span>Latência</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 🎮 ENTRETENIMENTO ========== -->
+    <section id="entretenimento" class="section">
+        <div class="section-header fade-in">
+            <p class="section-tag">ECOSSISTEMA</p>
+            <h2 class="section-title">Entretenimento</h2>
+            <p class="section-desc">Tudo sincronizado entre Discord, Habblet e a Rádio.</p>
+        </div>
+
+        <div class="entre-grid">
+            <div class="entre-card fade-in">
+                <div class="entre-glow"></div>
+                <span class="entre-emoji">🏨</span>
+                <h3>Integração Habblet</h3>
+                <p>Vincule sua conta e veja seu avatar atualizado no Discord e no site em tempo real.</p>
+                <span class="entre-tag">Habblet</span>
+            </div>
+            <div class="entre-card fade-in">
+                <div class="entre-glow"></div>
+                <span class="entre-emoji">📻</span>
+                <h3>Rádio 24/7</h3>
+                <p>Streaming ao vivo no servidor e no site com locutores e programação musical.</p>
+                <span class="entre-tag">Ao Vivo</span>
+            </div>
+            <div class="entre-card fade-in">
+                <div class="entre-glow"></div>
+                <span class="entre-emoji">💰</span>
+                <h3>Economia & XP</h3>
+                <p>Ganhe moedas diariamente, participe das atividades e suba no ranking!</p>
+                <span class="entre-tag">Ranking</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 🏆 RANKING ========== -->
+    <section id="ranking" class="section section-alt">
+        <div class="section-header fade-in">
+            <p class="section-tag">TEMPO REAL</p>
+            <h2 class="section-title">Ranking</h2>
+            <p class="section-desc">Atualizado automaticamente via MongoDB Atlas.</p>
+        </div>
+
+        <div class="ranking-tabs fade-in">
+            <button class="tab-btn ativo" id="tab-xp" onclick="mostrarRanking(event, 'xp')">⭐ XP</button>
+            <button class="tab-btn" id="tab-saldo" onclick="mostrarRanking(event, 'saldo')">💰 Moedas</button>
+        </div>
+
+        <div class="ranking-wrap fade-in">
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Usuário</th>
+                        <th id="col-valor">XP</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-body">
+                    <tr><td colspan="3" class="loading">Carregando... 🐤</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ========== 📊 STATUS ========== -->
+    <section id="status" class="section">
+        <div class="section-header fade-in">
+            <p class="section-tag">MONITORAMENTO</p>
+            <h2 class="section-title">Status do Bot</h2>
+        </div>
+
+        <div class="stats-grid fade-in">
+            <div class="stat-card">
+                <span class="stat-value" id="stat-online">--</span>
+                <span class="stat-label">Status</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-servidores">--</span>
+                <span class="stat-label">Servidores</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-usuarios">--</span>
+                <span class="stat-label">Usuários</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-comandos">--</span>
+                <span class="stat-label">Comandos</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="stat-ping">--</span>
+                <span class="stat-label">Ping</span>
+            </div>
+        </div>
+        <p class="last-seen" id="last-seen">Última atualização: --</p>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">🐤</span>
+                <span>Patinho Bot</span>
+            </div>
+            <p>Rádio Habbler © 2025 · Feito com 💜 e Python</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

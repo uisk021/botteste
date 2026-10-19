@@ -1,0 +1,11 @@
+discord.py[voice]==2.4.0
+davey
+PyNaCl==1.5.0
+flask==3.1.1
+python-dotenv==1.0.1
+pymongo==4.10.1
+dnspython==2.7.0
+certifi==2024.12.14
+yt-dlp==2024.12.13
+imageio-ffmpeg==0.5.1
+beautifulsoup4==4.12.3
